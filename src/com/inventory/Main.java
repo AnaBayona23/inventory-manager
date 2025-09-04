@@ -1,7 +1,10 @@
 package com.inventory;
 
+import com.inventory.ui.ConsoleUI;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        ConsoleUI ui = new ConsoleUI();
+        ui.start();
     }
 }
