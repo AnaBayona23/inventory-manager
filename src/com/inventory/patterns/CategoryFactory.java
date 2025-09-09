@@ -3,7 +3,7 @@ package com.inventory.patterns;
 import com.inventory.models.Category;
 
 public class CategoryFactory {
-    public static Category createBurgersCategory(String categoryName) {
+    public static Category createBurgersCategory() {
         return new CategoryBuilder()
                 .setName("Hamburguesas")
                 .setDescription("Hamburguesas y sándwiches calientes")
