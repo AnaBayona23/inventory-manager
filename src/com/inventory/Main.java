@@ -1,6 +1,5 @@
 package com.inventory;
 
-import com.inventory.patterns.CategorySingleton;
 import com.inventory.ui.ConsoleUI;
 
 public class Main {
