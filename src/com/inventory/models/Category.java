@@ -13,19 +13,9 @@ public class Category implements Cloneable {
         this.attributes = new HashMap<>();
     }
 
-    public Category(String name, String description) {
-        this();
-        this.name = name;
-        this.description = description;
-    }
-
     // Getters & Setters
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -48,16 +38,8 @@ public class Category implements Cloneable {
         return new HashMap<>(attributes);
     }
 
-    public void setAttributes(Map<String, String> attributes) {
-        this.attributes = new HashMap<>(attributes);
-    }
-
     public void addAttribute(String name, String type) {
         this.attributes.put(name, type);
-    }
-
-    public void removeAttribute(String name) {
-        this.attributes.remove(name);
     }
 
     @Override
