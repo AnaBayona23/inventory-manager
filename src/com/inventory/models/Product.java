@@ -16,40 +16,45 @@ public class Product implements Cloneable {
         this.quantity = 0;
     }
 
-    public Product(String name, String categoryId, double price) {
-        this();
+    // Getters & Setters
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    // Getters & Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public int getQuantity() {
+        return quantity;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getCategoryId() { return categoryId; }
-    public void setCategoryId(String categoryId) { this.categoryId = categoryId; }
-
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
-
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
-
-    public Map<String, Object> getAttributes() { return new HashMap<>(attributes); }
-    public void setAttributes(Map<String, Object> attributes) {
-        this.attributes = new HashMap<>(attributes);
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void addAttribute(String name, Object value) {
         this.attributes.put(name, value);
-    }
-
-    public Object getAttribute(String name) {
-        return this.attributes.get(name);
     }
 
     @Override

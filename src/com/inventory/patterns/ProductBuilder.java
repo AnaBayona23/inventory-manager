@@ -2,10 +2,8 @@ package com.inventory.patterns;
 
 import com.inventory.models.Product;
 
-import java.util.Map;
-
 public class ProductBuilder {
-    private Product product;
+    private final Product product;
 
     public ProductBuilder() {
         this.product = new Product();
@@ -31,15 +29,10 @@ public class ProductBuilder {
         return this;
     }
 
-    public ProductBuilder addAttribute(String name, Object value) {
+    public void addAttribute(String name, Object value) {
         this.product.addAttribute(name, value);
-        return this;
     }
 
-    public ProductBuilder setAttributes(Map<String, Object> attributes) {
-        this.product.setAttributes(attributes);
-        return this;
-    }
 
     public Product build() {
         if (product.getName() == null || product.getName().trim().isEmpty()) {
@@ -52,10 +45,5 @@ public class ProductBuilder {
             throw new IllegalStateException("El precio del producto no puede ser negativo");
         }
         return product;
-    }
-
-    public ProductBuilder reset() {
-        this.product = new Product();
-        return this;
     }
 }
