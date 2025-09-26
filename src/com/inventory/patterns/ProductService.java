@@ -9,15 +9,30 @@ import java.util.Map;
 
 public class ProductService {
     private final Map<String, Product> products;
+    private ProductValidationStrategy validationStrategy; // strategy
 
     public ProductService() {
         this.products = new HashMap<>();
+        this.validationStrategy = new BasicValidationStrategy(); // Default strategy
+    }
+
+    public void setValidationStrategy(ProductValidationStrategy strategy) {
+        this.validationStrategy = strategy;
+    }
+
+    public ProductValidationStrategy getValidationStrategy() {
+        return validationStrategy;
     }
 
     public void createProduct(Product product) {
         if (product == null) {
             throw new IllegalArgumentException("El producto no puede ser null");
         }
+
+        if (!validationStrategy.isValid(product)) {
+            throw new IllegalArgumentException("Producto inválido: " + validationStrategy.getValidationMessage());
+        }
+        
         products.put(product.getId(), product);
     }
 

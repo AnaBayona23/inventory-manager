@@ -3,6 +3,9 @@ package com.inventory.ui;
 import com.inventory.models.Category;
 import com.inventory.models.Product;
 import com.inventory.patterns.*;
+import com.inventory.patterns.CategoryBuilder;
+import com.inventory.patterns.CategoryFactory;
+import com.inventory.patterns.ProductBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -21,8 +24,17 @@ public class ConsoleUI {
         this.productService = new ProductService();
         this.inventoryService = new InventoryService(productService);
 
+        setupDesignPatterns();
+
         // Creates the predefined categories
         initializeDefaultCategories();
+    }
+
+    private void setupDesignPatterns() {
+        // Observer Pattern: Add observer for inventory changes
+        NotificationAdapter consoleNotifier = new ConsoleNotificationAdapter();
+        InventoryObserver logger = new InventoryChangeLogger(consoleNotifier);
+        inventoryService.addObserver(logger);
     }
 
     public void initializeDefaultCategories() {
@@ -130,10 +142,11 @@ public class ConsoleUI {
     }
 
 
+
     private void manageCategories() {
         boolean back = false;
         while (!back) {
-            System.out.println("\n~~~ GESTIÓN DE CATEGORÍAS ~~~");
+            System.out.println("\n~~~ GESTION DE CATEGORIAS ~~~");
             System.out.println("1. Crear categoría");
             System.out.println("2. Listar categorías");
             System.out.println("3. Volver al menú principal");
@@ -223,7 +236,8 @@ public class ConsoleUI {
             System.out.println("2. Listar productos");
             System.out.println("3. Clonar producto");
             System.out.println("4. Eliminar producto");
-            System.out.println("5. Volver al menú principal");
+            System.out.println("5. Cambiar estrategia de validación");
+            System.out.println("6. Volver al menú principal");
             System.out.print("Seleccione una opción: ");
 
             int option = readIntOption();
@@ -233,7 +247,8 @@ public class ConsoleUI {
                 case 2 -> listProducts();
                 case 3 -> cloneProduct();
                 case 4 -> deleteProduct();
-                case 5 -> back = true;
+                case 5 -> changeValidationStrategy();
+                case 6 -> back = true;
                 default -> System.out.println("Opción inválida.");
             }
         }
@@ -361,6 +376,25 @@ public class ConsoleUI {
                 System.out.println("Error al eliminar producto.");
             }
         }
+    }
+
+    private void changeValidationStrategy() {
+        System.out.println("\n+++ Cambiar Estrategia de Validación +++");
+        System.out.println("Estrategia actual: " + productService.getValidationStrategy().getValidationMessage());
+        
+        System.out.println("\nSeleccione nueva estrategia:");
+        System.out.println("1. Básica (por defecto)");
+        System.out.println("2. Estricta");
+        System.out.print("Opción: ");
+        
+        int strategyOption = readIntOption();
+        ProductValidationStrategy newStrategy = switch (strategyOption) {
+            case 2 -> new StrictValidationStrategy();
+            default -> new BasicValidationStrategy();
+        };
+        
+        productService.setValidationStrategy(newStrategy);
+        System.out.println("Estrategia cambiada a: " + newStrategy.getValidationMessage());
     }
 
     // Auxiliar method to parse attributes to its type
