@@ -24,11 +24,6 @@ public class ProductBuilder {
         return this;
     }
 
-    public ProductBuilder setQuantity(int quantity) {
-        this.product.setQuantity(quantity);
-        return this;
-    }
-
     public void addAttribute(String name, Object value) {
         this.product.addAttribute(name, value);
     }

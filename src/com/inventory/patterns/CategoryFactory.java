@@ -31,11 +31,4 @@ public class CategoryFactory {
                 .addAttribute("temperatura", "String")
                 .build();
     }
-
-    public static Category createCustomCategory(String name, String description) {
-        return new CategoryBuilder()
-                .setName(name)
-                .setDescription(description)
-                .build();
-    }
 }
