@@ -1,3 +1,4 @@
+package com.inventory.patterns;
 
 import com.inventory.models.Product;
 import com.inventory.patterns.ProductValidationStrategy;

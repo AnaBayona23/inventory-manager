@@ -32,7 +32,7 @@ public class ProductService {
         if (!validationStrategy.isValid(product)) {
             throw new IllegalArgumentException("Producto inválido: " + validationStrategy.getValidationMessage());
         }
-        
+
         products.put(product.getId(), product);
     }
 
